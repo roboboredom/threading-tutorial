@@ -7,9 +7,9 @@
 #include <mutex>
 
 
-/*extern int iValueA; //example data
+extern int iValueA; //example data
 extern int iValueB;
 
-std::mutex mServerClientShareGuard;*/
+extern std::mutex mServerClientShareGuard;
 
 #endif

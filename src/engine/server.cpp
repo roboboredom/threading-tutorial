@@ -1,7 +1,7 @@
 #include "server.h"
 
 
-int iServerThreadMsPerLoop = 1000 / 30;
+int iServerThreadMsPerLoop = 1000;
 
 void FServerThreadCallback()
 {
@@ -11,12 +11,12 @@ void FServerThreadCallback()
   {
     std::this_thread::sleep_for(std::chrono::milliseconds(iServerThreadMsPerLoop));
 
-    /*if(mServerClientShareGuard.try_lock())
+    if(mServerClientShareGuard.try_lock())
     {
       iValueA++; //example data
       iValueB--;
       
       mServerClientShareGuard.unlock();
-    }*/
+    }
   }
 }

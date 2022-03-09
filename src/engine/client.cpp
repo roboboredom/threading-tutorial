@@ -1,7 +1,7 @@
 #include "client.h"
 
 
-int iClientThreadFps = 1;
+int iClientThreadFps = 30;
 int iClientThreadMsPerLoop = 1000 / iClientThreadFps;
 
 void FClientThreadCallback()
@@ -22,12 +22,12 @@ void FClientThreadCallback()
     std::cout << "\n";
     if (iClientLoop > iClientThreadFps) { iClientLoop = 0; }
     
-    /*if(mServerClientShareGuard.try_lock())
+    if(mServerClientShareGuard.try_lock())
     {  
       std::cout << "iValueA: " << iValueA << "\n"; //example data
       std::cout << "iValueB: " << iValueB << "\n";
       
       mServerClientShareGuard.unlock();
-    }*/
+    }
   }
 }
