@@ -30,7 +30,7 @@ void FFunction();
 namespace nNamespace {}
 enum eEnum { one, two };
 
-class CClass {} 
+class CClass {}
 CClass oObject;
 
 /* prefix prefixes, in order of precedence */ 
