@@ -1,8 +1,24 @@
-## threading-tutorial
+# threading-tutorial
 multithreading project for robotics class  
 author: Willem Dawson Gray (willemdgray@outlook.com)  
 
-### styleguide:
+## project design:
+```c++
+/* Server & Client Bridge design:
+
+OFFLINE:
+  [server] <----> [bridge] <----> [client]
+  
+  Data sent over bridge is not serialized and 
+  is transferred directly.
+
+ONLINE:
+  [server] <----> [bridge] <----> [client]
+
+  Data sent over bridge is serialized for transport 
+  and then deserialized at destination. */
+```
+## var naming guide:
 ```c++
 #include <iostream>
 #include <string>

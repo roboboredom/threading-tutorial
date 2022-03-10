@@ -2,6 +2,22 @@
 #include "engine/client.h"
 #include "engine/server.h"
 
+class Bridge
+{
+  
+}
+
+//server (logic)
+class Server 
+{
+  
+}
+
+//client (display)
+class Client
+{
+  
+}
 
 int main()
 {
@@ -9,10 +25,8 @@ int main()
   
   std::thread* p_tServerThread = new std::thread(FServerThreadCallback);
   std::thread* p_tClientThread = new std::thread(FClientThreadCallback);
-  
   p_tServerThread->join();
   p_tClientThread->join();
-    
   delete p_tServerThread;
   delete p_tClientThread;
   

@@ -4,6 +4,10 @@
 #include "shared.h"
 
 
+class CClientBase {
+
+}
+
 extern int iClientThreadFps;
 extern int iClientThreadMsPerLoop;
 
