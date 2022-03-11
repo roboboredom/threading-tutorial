@@ -4,13 +4,13 @@
 #include "shared.h"
 
 
-class CClientBase {
-
+/* Client: Sends commands to server. Gets commands from server. 
+Acts as interface to server (e.g. console, controller, screen, etc).
+All getting/sending done via a Bridge. */
+class CBaseClient 
+{
+  public:
+    CBaseClient();
 }
-
-extern int iClientThreadFps;
-extern int iClientThreadMsPerLoop;
-
-void FClientThreadCallback();
 
 #endif

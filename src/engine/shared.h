@@ -6,10 +6,9 @@
 #include <chrono>
 #include <mutex>
 
+#include <bridge.h>
 
-extern int iValueA; //example data
-extern int iValueB;
 
-extern std::mutex mServerClientShareGuard;
+//...
 
 #endif
