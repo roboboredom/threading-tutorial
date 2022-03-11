@@ -1,7 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "shared.h"
+#include "bridge.h"
 
 
 /* Client: Sends commands to server. Gets commands from server. 
@@ -11,6 +11,6 @@ class CBaseClient
 {
   public:
     CBaseClient();
-}
+};
 
 #endif

@@ -1,3 +1,5 @@
+# make build folder if not exist
+#   "mkdir -p build; "
 # start in build folder
 #   "cd build; "
 #
@@ -18,5 +20,5 @@
 # run built program:
 #  "./project"
 
-run="cd build; g++ -o project -I ../src -I ../src/engine ../src/*.cpp ../src/engine/*.cpp -pthread; ./project"
+run="mkdir -p build; cd build; g++ -o project -I ../src -I ../src/engine ../src/*.cpp ../src/engine/*.cpp -pthread" # ./project"
 entrypoint="src/main.cpp"

@@ -4,4 +4,4 @@
 CBaseServer::CBaseServer()
 {
   std::cout << "init CBaseServer\n";
-}
+}  
