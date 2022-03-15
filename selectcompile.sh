@@ -1,26 +1,16 @@
 #!/bin/bash
 
 shopt -s nocasematch
-
-echo -n "What to recompile? (\'all\', \'server\', \'client\'): "
+echo -n "What to compile? (\'all\'): "
 
 read module
 case $module in
 all)
   echo "Recompiling all...";
+  
   mkdir -p build; cd build;
-  echo "...finished!"
-  ;;
-
-server)
-  echo "Recompiling server...";
-  mkdir -p build; cd build;
-  echo "...finished!"
-  ;;
-
-client)
-  echo "Recompiling server...";
-  mkdir -p build; cd build;
+  g++ -o project -I ../src -I ../src/engine ../src/*.cpp ../src/engine/*.cpp -pthread;
+  
   echo "...finished!"
   ;;
 

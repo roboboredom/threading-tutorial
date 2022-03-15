@@ -1,6 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include "shared.h"
 #include "bridge.h"
 
 

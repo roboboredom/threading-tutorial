@@ -4,7 +4,6 @@ shared.h:
     client.h
     server.h
 */
-
 #ifndef SHARED_H
 #define SHARED_H
 
@@ -12,8 +11,10 @@ shared.h:
 #include <thread>
 #include <chrono>
 #include <mutex>
+#include <string>
+#include <vector>
 
 
-//
+//...
 
 #endif

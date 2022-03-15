@@ -1,12 +1,9 @@
 #include "engine/client.h"
 #include "engine/server.h"
 
-
 int main()
 {
-  CBaseBridge oBridge;
-  CBaseServer oServer;
-  CBaseClient oClient;
+  std::cout << "init main\n";
   
   return 0;
 }

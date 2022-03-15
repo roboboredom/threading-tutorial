@@ -4,6 +4,14 @@ author: Willem Dawson Gray (willemdgray@outlook.com)
 
 ## project design:
 ```c++
+/* Program order:
+
+STEPS:
+  1. Construct bridge object.
+  2. Construct server, passing bridge.
+  3. Construct clients, passing bridge. */
+
+
 /* Server & Client Bridge design:
 
 OFFLINE:
@@ -47,7 +55,7 @@ namespace nNamespace {}
 enum eEnum { one, two };
 
 class CClass {}
-CClass oObject;
+CClass oClass; // ???
 
 /* prefix prefixes, in order of precedence */ 
 // p_ = pointer
