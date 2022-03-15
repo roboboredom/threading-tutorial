@@ -1,15 +1,16 @@
 #!/bin/bash
+#bash script to run different compiles easily
+
+mkdir -p build; cd build; #navigate to build dir, if not exist make it
 
 shopt -s nocasematch
 echo -n "What to compile? (\'all\'): "
-
 read module
 case $module in
 all)
   echo "Recompiling all...";
   
-  mkdir -p build; cd build;
-  g++ -o project -I ../src -I ../src/engine ../src/*.cpp ../src/engine/*.cpp -pthread;
+  g++ -o test -I ../src -I ../src/engine -I ../src/project -I ../src/project/clients ../src/*.cpp ../src/engine/*.cpp ../src/project/*.cpp ../src/project/clients/*.cpp -pthread;
   
   echo "...finished!"
   ;;
@@ -19,6 +20,10 @@ all)
   ;;
 esac
 
+./test; #run program
+cd ..; #move back to root dir to avoid issues
+
+#reference:
 # make build folder if not exist
 #   "mkdir -p build; "
 #
@@ -31,10 +36,14 @@ esac
 # set include paths (.h):
 #   "-I ../src "
 #   "-I ../src/engine "
+#   "-I ../src/project "
+#   "-I ../src/project/clients "
 #
 # set source paths (.cpp):
 #   "../src/*.cpp "
 #   "../src/engine/*.cpp "
+#   "../src/project/*.cpp "
+#   "../src/project/clients/*.cpp "
 #
 # link libraries:
 #   "-pthread; "

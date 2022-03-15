@@ -4,27 +4,96 @@ author: Willem Dawson Gray (willemdgray@outlook.com)
 
 ## project design:
 ```c++
-/* Program order:
+/* ascii things: ═ ║ ╔ ╗ ╚ ╝ ╠ ╣ ╦ ╩ ╬
 
-STEPS:
-  1. Construct bridge object.
-  2. Construct server, passing bridge.
-  3. Construct clients, passing bridge. */
+ENGINE STRUCTURE:
+  [main]
+    ║
+    v
+  [enginemanager] <═════════════════════(commands)═══╗
+    ║                                               ║
+    ╠═(create/destroy/store multiple)═> [clients]   ║
+    ║                                      ^        ║
+    ║                                      ║        ║
+    ║                                  (commands)   ║
+    ║                                      ║        ║
+    ║                                      v        ║
+    ╠═(create/destroy/store)═══════════> [bridge] <══╝
+    ║                                      ^
+    ║                                      ║
+    ║                                  (commands)
+    ║                                      ║
+    ║                                      v
+    ╚═(create/destroy/store)═══════════> [server]
 
 
-/* Server & Client Bridge design:
-
-OFFLINE:
-  [server] <----> [bridge] <----> [client]
+OFFLINE / ONLINE DIFFERENCE:
+  OFFLINE:
+    [server] <----> [bridge] <----> [client]
   
-  Data sent over bridge is not serialized and 
-  is transferred directly.
+    Data sent over bridge is not serialized and 
+    is transferred directly.
 
-ONLINE:
-  [server] <----> [bridge] <----> [client]
+  ONLINE:
+    [server] <----> [bridge] <----> [client]
 
-  Data sent over bridge is serialized for transport 
-  and then deserialized at destination. */
+    Data sent over bridge is serialized for transport 
+    and then deserialized at destination.
+
+
+INCLUDE STRUCTURE:
+  base bridge
+  {
+    (derived) project bridge
+    {
+      base client
+      {
+        (derived) project clients
+        {
+          base engine manager {}
+        }
+      }
+
+      base server
+      {
+        (derived) project server
+        {
+          base engine manager {}
+        }
+      }
+    }
+  }
+  
+  base engine manager
+  {
+    (derived) project engine manager
+    {
+      main
+    }
+  }
+
+
+FOLDER STRUCTURE:
+  build:
+    compiler output
+
+  src:
+    engine:
+      base bridge
+      base client
+      base server
+      base engine manager
+
+    project:
+      clients:
+        (derived) project clients
+
+      (derived) project server
+      (derived) project bridge (e.g. custom commands)
+      (derived) engine manager      
+
+    main
+*/
 ```
 ## var naming guide:
 ```c++
