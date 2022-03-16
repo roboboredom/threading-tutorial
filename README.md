@@ -75,8 +75,9 @@ INCLUDE STRUCTURE:
 
 FOLDER STRUCTURE:
   build:
-    compiler output
-
+    // compiler output
+  include:
+    // same as "src" but for headers
   src:
     engine:
       base bridge
@@ -92,7 +93,7 @@ FOLDER STRUCTURE:
       (derived) project bridge (e.g. custom commands)
       (derived) engine manager      
 
-    main
+    main.cpp
 */
 ```
 ## var naming guide:

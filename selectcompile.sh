@@ -10,7 +10,7 @@ case $module in
 all)
   echo "Recompiling all...";
   
-  g++ -o test -I ../src -I ../src/engine -I ../src/project -I ../src/project/clients ../src/*.cpp ../src/engine/*.cpp ../src/project/*.cpp ../src/project/clients/*.cpp -pthread;
+  g++ -o test -I ../include -I ../include/engine -I ../include/project -I ../include/project/clients ../src/*.cpp ../src/engine/*.cpp ../src/project/*.cpp ../src/project/clients/*.cpp;
   
   echo "...finished!"
   ;;
@@ -34,10 +34,10 @@ cd ..; #move back to root dir to avoid issues
 #   "g++ -o project " 
 #
 # set include paths (.h):
-#   "-I ../src "
-#   "-I ../src/engine "
-#   "-I ../src/project "
-#   "-I ../src/project/clients "
+#   "-I ../include "
+#   "-I ../include/engine "
+#   "-I ../include/project "
+#   "-I ../include/project/clients "
 #
 # set source paths (.cpp):
 #   "../src/*.cpp "
