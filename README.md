@@ -2,22 +2,22 @@
 multithreading project for robotics class  
 author: Willem Dawson Gray (willemdgray@outlook.com)  
 
-## project design:
+## Project design:
 ```c++
-/* ascii things: ═ ║ ╔ ╗ ╚ ╝ ╠ ╣ ╦ ╩ ╬
+/* ascii chars: ═ ║ ╔ ╗ ╚ ╝ ╠ ╣ ╦ ╩ ╬
 
 ENGINE STRUCTURE:
   [main]
     ║
     v
   [enginemanager] <═════════════════════(commands)═══╗
-    ║                                               ║
-    ╠═(create/destroy/store multiple)═> [clients]   ║
-    ║                                      ^        ║
-    ║                                      ║        ║
-    ║                                  (commands)   ║
-    ║                                      ║        ║
-    ║                                      v        ║
+    ║                                                ║
+    ╠═(create/destroy/store multiple)═> [clients]    ║
+    ║                                      ^         ║
+    ║                                      ║         ║
+    ║                                  (commands)    ║
+    ║                                      ║         ║
+    ║                                      v         ║
     ╠═(create/destroy/store)═══════════> [bridge] <══╝
     ║                                      ^
     ║                                      ║
@@ -76,8 +76,10 @@ INCLUDE STRUCTURE:
 FOLDER STRUCTURE:
   build:
     // compiler output
+    
   include:
     // same as "src" but for headers
+    
   src:
     engine:
       base bridge
@@ -96,7 +98,7 @@ FOLDER STRUCTURE:
     main.cpp
 */
 ```
-## var naming guide:
+## Hungarian notation reference:
 ```c++
 #include <iostream>
 #include <string>
@@ -104,37 +106,63 @@ FOLDER STRUCTURE:
 #include <thread>
 #include <mutex>
 
-/* for const just capitalize the name */
-int iINT_VALUE;
+/* Prioritize searchability, e.g.
+  "appleBig"
+  "appleSmall"
 
-/* name prefixes */
+Instead of:
+  "bigApple"
+  "smallApple"                    
+
+Make use of grouping! E.g. this:
+  class CBaseClient {};
+  class CClientKeyboard : CBaseClient {};
+  class CClientRender : CBaseClient {};
+
+Becomes this:
+  class CBaseClient {};
+  namespace Clients 
+  {
+    class Keyboard : CBaseClient {};
+    class Render : CBaseClient {};
+  }                                       */
+
+/* Prefixes */
 int iInt;
 float fFloat;
 double dDouble;
-bool = bBool;
-
-char = cChar;
+bool bBool;
+char cChar;
 std::string sString;
-
 std::thread tThread;
 std::mutex mMutex;
+std::vector<int> vVector;
+namespace nNamespace {};
+enum eEnum {};
+// functions have no prefix
 
-void FFunction();
+/* For a pointer, put "p_" before all prefixes above this comment */
+int* p_iInt;
 
-namespace nNamespace {}
-enum eEnum { one, two };
+/* For a static, put "s_" before all prefixes above this comment */
+static int s_iInt;
 
-class CClass {}
-CClass oClass; // ???
+class CClass 
+{
+public:
+  CClass(); // constructor & destructor have no prefix
+  ~CClass();
+  
+  /* For all other class members, put "m_" 
+     before all prefixes above this comment */
+  static int m_s_iInt;
+  int        m_iInt;
+  int*       m_p_iInt = &iInt;
+  
+private:
+  void m_foo();
+};
 
-/* prefix prefixes, in order of precedence */ 
-// p_ = pointer
-int* p_iVar;
-
-// v_ = vector
-std::vector<int> v_iVar;
-
-/* order of precedence example */
-// pointer TO vector OF int(s)
-std::vector<int>* p_v_iVar = &v_iVar;
+/* Put "o" for class objects, after all prefixes above this comment */
+CClass* p_oClassObject = new CClass();
 ```
