@@ -1,8 +1,9 @@
-#include <iostream>
+#include "engine/manager.h"
+
 
 int main()
 {
-  std::cout << "init main\n";
+  CBaseManager oManager;
   
   return 0;
 }

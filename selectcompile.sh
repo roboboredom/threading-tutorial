@@ -10,7 +10,7 @@ case $module in
 all)
   echo "Recompiling all...";
   
-  g++ -o test -I ../include -I ../include/engine -I ../include/project -I ../include/project/clients ../src/*.cpp ../src/engine/*.cpp ../src/project/*.cpp ../src/project/clients/*.cpp;
+  g++ -c test -I ../include -I ../include/engine -I ../include/project -I ../include/project/clients ../src/*.cpp ../src/engine/*.cpp; #../src/project/*.cpp ../src/project/clients/*.cpp;
   
   echo "...finished!"
   ;;

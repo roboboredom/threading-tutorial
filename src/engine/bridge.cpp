@@ -3,5 +3,5 @@
 
 CBaseBridge::CBaseBridge()
 {
-  
+  std::cout << "init CBaseBridge\n";
 }

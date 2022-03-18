@@ -8,6 +8,6 @@ class CBaseClient
 {
 public:
   CBaseClient();
-}
+};
 
 #endif

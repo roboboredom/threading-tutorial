@@ -103,6 +103,7 @@ FOLDER STRUCTURE:
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 #include <thread>
 #include <mutex>
 
@@ -137,6 +138,8 @@ std::string sString;
 std::thread tThread;
 std::mutex mMutex;
 std::vector<int> vVector;
+std::map<char, int> mMap;
+
 namespace nNamespace {};
 enum eEnum {};
 // functions have no prefix
