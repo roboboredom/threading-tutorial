@@ -1,52 +1,49 @@
 #!/bin/bash
-#bash script to run different compiles easily
+# bash script to run different compile / linking steps easily
 
-mkdir -p build; cd build; #navigate to build dir, if not exist make it
 
-shopt -s nocasematch
-echo -n "What to compile? (\'all\'): "
-read module
-case $module in
-all)
-  echo "Recompiling all...";
-  
-  g++ -c test -I ../include -I ../include/engine -I ../include/project -I ../include/project/clients ../src/*.cpp ../src/engine/*.cpp; #../src/project/*.cpp ../src/project/clients/*.cpp;
-  
-  echo "...finished!"
-  ;;
+# include paths (.h):
+inc_root="-I ../include"
+inc_engine="-I ../include/engine"
+inc_project="-I ../include/project \
+             -I ../include/project/clients"
 
-*)
-  echo "Invalid argument!"
-  ;;
+# source paths (.cpp):
+src_root="../src/*.cpp"
+src_engine="../src/engine/*.cpp"
+src_project="../src/project/*.cpp \
+             ../src/project/clients/*.cpp"
+
+
+# make build dir; if not exist, move to it
+mkdir -p build; cd build;
+
+# get input
+echo -n "What to build? ('engine', 'project'): "
+shopt -s nocasematch; read input
+
+# act on input
+case $input in
+
+  engine)
+    echo "Building engine..."
+    g++ -o engine \
+    $inc_root $inc_engine \
+    $src_root $src_engine \
+    -pthread
+    echo "...finished!"
+    ;;
+
+  project)
+    echo "Building project..."
+    g++ -o project \
+    $inc_root $inc_engine $inc_project \
+    $src_root $src_engine $inc_ \
+    -pthread
+    echo "...finished!"
+    ;;
+
+  *)
+    echo "Invalid argument!"
+    ;;
 esac
-
-./test; #run program
-cd ..; #move back to root dir to avoid issues
-
-#reference:
-# make build folder if not exist
-#   "mkdir -p build; "
-#
-# start in build folder
-#   "cd build; "
-#
-# call g++ and set output name:
-#   "g++ -o project " 
-#
-# set include paths (.h):
-#   "-I ../include "
-#   "-I ../include/engine "
-#   "-I ../include/project "
-#   "-I ../include/project/clients "
-#
-# set source paths (.cpp):
-#   "../src/*.cpp "
-#   "../src/engine/*.cpp "
-#   "../src/project/*.cpp "
-#   "../src/project/clients/*.cpp "
-#
-# link libraries:
-#   "-pthread; "
-# 
-# run built program:
-#  "./project"
