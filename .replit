@@ -1,2 +1,2 @@
-run="bash selectcompile.sh"
+run="bash quick-build-and-test.sh"
 entrypoint="src/main.cpp"
