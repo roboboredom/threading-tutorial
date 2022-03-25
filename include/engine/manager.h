@@ -9,11 +9,6 @@ class CBaseManager
 {
 public:
   CBaseManager();
-  //void m_newClient();
-
-//protected:
-  //CBaseServer m_oServer;
-  //std::map<int, CBaseClient*> m_mClients;
 };
 
 #endif

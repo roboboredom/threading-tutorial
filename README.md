@@ -4,13 +4,13 @@ author: Willem Dawson Gray (willemdgray@outlook.com)
 
 ## Project design:
 ```c++
-/* ascii chars: ═ ║ ╔ ╗ ╚ ╝ ╠ ╣ ╦ ╩ ╬
+/* ascii chars: ═ ║ ╔ ╗ ╚ ╝ ╠ ╣ ╦ ╩ ╬ 
 
 ENGINE STRUCTURE:
   [main]
     ║
     v
-  [enginemanager] <═════════════════════(commands)═══╗
+  [manager] <═════════════════════(commands)═══╗
     ║                                                ║
     ╠═(create/destroy/store multiple)═> [clients]    ║
     ║                                      ^         ║
@@ -98,6 +98,7 @@ FOLDER STRUCTURE:
     main.cpp
 */
 ```
+
 ## Hungarian notation reference:
 ```c++
 #include <iostream>
@@ -168,4 +169,23 @@ private:
 
 /* Put "o" for class objects, after all prefixes above this comment */
 CClass* p_oClassObject = new CClass();
+```
+
+## Packet structure:
+```c++
+#include <map>
+// plane = packet
+// seat  = packet slot
+// type  = packet priority level
+
+int iTotalSeats = 16;
+int iTotalClasses = 4;
+
+int std::map<char, int> m;
+
+for (int i = 0; i < iTotalClasses; i++)
+{
+  mMaxSizes[char(i)] = i;
+}
+
 ```
