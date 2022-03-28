@@ -18,7 +18,7 @@ src_project="../src/project/*.cpp \
              ../src/project/clients/*.cpp"
 
 #other vars 
-timestamp=$(date '+%F--%H-%M-%S')
+timestamp=$(date '+%F_%H-%M-%S')
 
 
 # prompt on what to build
@@ -28,7 +28,7 @@ case $input in
   engine | e)
     echo -e "Building engine...\n"
     
-    executable_name="engine__$timestamp"
+    executable_name="engine-$timestamp.exe"
     
     g++ -o $executable_name \
     $inc_root $inc_engine \
@@ -41,7 +41,7 @@ case $input in
   project | p)
     echo -e "Building project...\n"
     
-    executable_name="project__$timestamp"
+    executable_name="project-$timestamp.exe"
     
     g++ -o $executable_name \
     $inc_root $inc_engine $inc_project \

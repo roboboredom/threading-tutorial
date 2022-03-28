@@ -1,1 +1,7 @@
+# ignore below when committing to git
+
+# directories
 build/
+
+# file extensions
+*.o

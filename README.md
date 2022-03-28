@@ -10,7 +10,7 @@ ENGINE STRUCTURE:
   [main]
     ║
     v
-  [manager] <═════════════════════(commands)═══╗
+  [manager] <═════════════════════(commands)══════════╗
     ║                                                ║
     ╠═(create/destroy/store multiple)═> [clients]    ║
     ║                                      ^         ║
