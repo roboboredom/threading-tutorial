@@ -10,7 +10,7 @@ class CBaseCommand
 public:
   int m_iTransmitterId;
 
-  CBaseCommand(int iTransmitterId = 0) 
+  CBaseCommand(int iTransmitterId) 
   {
     m_iTransmitterId = iTransmitterId;
   }
@@ -49,14 +49,15 @@ std::string random_string(size_t length)
 int main()
 {
   std::vector <CRequest*> vRequests;
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < 5; i++)
   {
     vRequests.push_back( new CRequest(i, random_string(10)));
   }
 
   for (CRequest* p_oRequest : vRequests)
   {
-    std::cout << "{ id: " << p_oRequest->m_iTransmitterId << ", command: " << p_oRequest->m_sCommand << " }\n";
+    std::cout << "{ id: "      << p_oRequest->m_iTransmitterId
+              << ", command: " << p_oRequest->m_sCommand       << " }\n";
   }
 
   
