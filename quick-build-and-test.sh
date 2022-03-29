@@ -22,9 +22,21 @@ timestamp=$(date '+%F_%H-%M-%S')
 
 
 # prompt on what to build
-echo -n "What to build? ('engine', 'project'): "; read input
+echo -n "What to build? ('main','engine', 'project'): "; read input
 
 case $input in
+  main | m)
+    echo -e "Building main...\n"
+    
+    executable_name="main-$timestamp.exe"
+    
+    g++ -o $executable_name \
+    $src_root \
+    -pthread
+    
+    echo -e "\n...finished!"
+    ;;
+
   engine | e)
     echo -e "Building engine...\n"
     

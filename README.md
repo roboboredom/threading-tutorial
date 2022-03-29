@@ -2,11 +2,11 @@
 multithreading project for robotics class  
 author: Willem Dawson Gray (willemdgray@outlook.com)  
 
-## Project design:
+## Project notes:
 ```c++
-/* ascii chars: ═ ║ ╔ ╗ ╚ ╝ ╠ ╣ ╦ ╩ ╬ 
+/* ascii chars: ═ ║ ╔ ╗ ╚ ╝ ╠ ╣ ╦ ╩ ╬
 
-ENGINE STRUCTURE:
+ENGINE FLOWCHART:
   [main]
     ║
     v

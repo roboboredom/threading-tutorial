@@ -1,35 +1,64 @@
-#include <iostream>
 #include <vector>
-#include <map>
+#include <string>
+#include <iostream>
+#include <algorithm> // std::generate_n()
+#include <stdlib.h> // std::rand()
+
+/* COMMAND SYSTEM */
+class CBaseCommand
+{
+public:
+  int m_iTransmitterId;
+
+  CBaseCommand(int iTransmitterId = 0) 
+  {
+    m_iTransmitterId = iTransmitterId;
+  }
+};
+
+class CRequest : public CBaseCommand
+{
+public:
+  std::string m_sCommand;
+
+  CRequest(int iTransmitterId, std::string sCommand) 
+  : CBaseCommand(iTransmitterId)
+  {
+    m_sCommand = sCommand;
+  }
+};
 
 
-const int iNUM_SLOTS = 16;
-const int iNUM_PRIORITY_LEVELS = 4;
-
-std::vector<char> vPriorityLevel;
-std::map<char, int> mPriorityLevelSize;
-//std::map<int, int> mPriorityLevelMaxPerPacket;
-
+/* testing */
+std::string random_string(size_t length)
+{
+    auto randchar = []() -> char
+    {
+        const char charset[] =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+        const size_t max_index = (sizeof(charset) - 1);
+        return charset[ std::rand() % max_index ];
+    };
+    std::string str(length,0);
+    std::generate_n( str.begin(), length, randchar );
+    return str;
+}
 
 int main()
 {
-  int iNumSlotsLeft = iNUM_SLOTS;
-  
-  for (int i = 1; i < iNUM_PRIORITY_LEVELS + 1; i++)
+  std::vector <CRequest*> vRequests;
+  for (int i = 0; i < 10; i++)
   {
-    vPriorityLevel.push_back(char(i));
-    
-    iNumSlotsLeft = iNumSlotsLeft / 2;
-    
-    mPriorityLevelSize[char(i)] = iNumSlotsLeft;
-      
-    //mPriorityLevelMaxPerPacket[i] = iNumSlotsLeft;
-  }
-  
-  for (int i : vPriorityLevel)
-  {
-    std::cout << "level: " << i << "; size: " << mPriorityLevelSize[i] << "\n";
+    vRequests.push_back( new CRequest(i, random_string(10)));
   }
 
+  for (CRequest* p_oRequest : vRequests)
+  {
+    std::cout << "{ id: " << p_oRequest->m_iTransmitterId << ", command: " << p_oRequest->m_sCommand << " }\n";
+  }
+
+  
   return 0;
 }

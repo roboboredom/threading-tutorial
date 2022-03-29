@@ -8,6 +8,8 @@ class CBaseBridge
 {
 public:
   CBaseBridge();
+
+  voidBuffer
 };
 
 #endif
