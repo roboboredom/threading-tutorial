@@ -5,14 +5,16 @@
 #include <stdlib.h> // std::rand()
 
 /* COMMAND SYSTEM */
+class CBaseCommandManager
+
 class CBaseCommand
 {
 public:
-  int m_iTransmitterId;
+  int m_iTransmitterID;
 
-  CBaseCommand(int iTransmitterId) 
+  CBaseCommand(int iTransmitterID) 
   {
-    m_iTransmitterId = iTransmitterId;
+    m_iTransmitterID = iTransmitterID;
   }
 };
 
@@ -21,14 +23,48 @@ class CRequest : public CBaseCommand
 public:
   std::string m_sCommand;
 
-  CRequest(int iTransmitterId, std::string sCommand) 
-  : CBaseCommand(iTransmitterId)
+  CRequest(int iTransmitterID, std::string sCommand) 
+  : CBaseCommand(iTransmitterID)
   {
     m_sCommand = sCommand;
   }
 };
 
 
+/* CLIENT & SERVER SYSTEM */
+CBaseClient
+{
+public:
+  CBaseClient()
+  {
+  }
+
+protected:
+};
+
+CBaseServer
+{
+public:
+  CBaseServer()
+  {
+  }
+
+protected:
+};
+
+
+/* MANAGER SYSTEM */
+CBaseManager()
+{
+public:
+  CBaseManager()
+  {
+  }
+
+protected:
+};
+
+  
 /* testing */
 std::string random_string(size_t length)
 {
@@ -48,17 +84,6 @@ std::string random_string(size_t length)
 
 int main()
 {
-  std::vector <CRequest*> vRequests;
-  for (int i = 0; i < 5; i++)
-  {
-    vRequests.push_back( new CRequest(i, random_string(10)));
-  }
-
-  for (CRequest* p_oRequest : vRequests)
-  {
-    std::cout << "{ id: "      << p_oRequest->m_iTransmitterId
-              << ", command: " << p_oRequest->m_sCommand       << " }\n";
-  }
 
   
   return 0;
