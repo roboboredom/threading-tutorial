@@ -8,22 +8,29 @@
 #include <stdlib.h> // std::rand()
 
 
-/* Generates std::string of random chars, of size_t length. */
-std::string random_string(size_t length);
-
-
-template<typename T> // see: Curiously Recurring Template Pattern
+// see: Curiously Recurring Template Pattern
+template <class T> 
 class CUniqueKeyRegistry
 {
 public:
   /* adds new value at unique id, returns the unique id */
   static int register(std::string value);
+  {
+    mRegistry[T::iKeyCounter++] = value;
+    return T::iKeyCounter;
+  }
 
   /* returns true if key exists */
-  static bool isRegistered(int key);
+  static bool isRegistered(int key) 
+  { 
+    return T::mRegistry.count(key); 
+  }
 
   /* returns value at key */
-  static std::string getValue(int key);
+  static std::string getValue(int key) 
+  { 
+    return T::mRegistry[key]; 
+  }
 
   // /* returns the full registry std::map */
   // static const std::map<int, std::string>& getRegistry() { return mRegistry; }
@@ -36,16 +43,7 @@ private:
   static int iKeyCounter;
 };
 //template<typename T> std::map<int, std::string> CUniqueKeyRegistry<T>::mRegistry;
-template<typename T> int CUniqueKeyRegistry<T>::iKeyCounter = 0;
+//template<typename T> int CUniqueKeyRegistry<T>::iKeyCounter = 0;
 
-
-class FruitRegistry final : public CUniqueKeyRegistry<FruitRegistry> {
-  this::register("apple");
-  this::register("pear");
-  this::register("melon");
-  this::register("orange");
-};
-
-int main();
 
 #endif

@@ -1,3 +1,11 @@
+#include "main.h"
+
+
+class FruitRegistry : public CUniqueKeyRegistry<FruitRegistry> {};
+FruitRegistry::register("apple");
+FruitRegistry::register("pear");
+FruitRegistry::register("melon");
+FruitRegistry::register("orange");
 
 /* Generates std::string of random chars, of size_t length. */
 std::string random_string(size_t length)
@@ -16,44 +24,7 @@ std::string random_string(size_t length)
     return str;
 }
 
-
-template<typename T> // see: Curiously Recurring Template Pattern
-class CUniqueKeyRegistry
-{
-public:
-  /* adds new value at unique id, returns the unique id */
-  int register(std::string value)
-  {
-    mRegistry[T::iKeyCounter++] = value;
-    return T::iKeyCounter;
-  }
-
-  /* returns true if key exists */
-  bool isRegistered(int key) { return T::mRegistry.count(key); } // count() only returns 0 or 1
-
-  /* returns value at key */
-  std::string getValue(int key) { return T::mRegistry[key]; }
-
-  // /* returns the full registry std::map */
-  // static const std::map<int, std::string>& getRegistry() { return mRegistry; }
-
-private:
-  /* std::map registry of keys (int) to values (std::string) */
-  std::map<int, std::string> mRegistry;
-
-  /* key incrementor */
-  int iKeyCounter;
-};
-//template<typename T> std::map<int, std::string> CUniqueKeyRegistry<T>::mRegistry;
-template<typename T> int CUniqueKeyRegistry<T>::iKeyCounter = 0;
-
-
-class FruitRegistry : public CUniqueKeyRegistry<FruitRegistry> {};
-FruitRegistry::register("apple");
-FruitRegistry::register("pear");
-FruitRegistry::register("melon");
-FruitRegistry::register("orange");
-
+/* main */
 int main()
 {
   // register some random keys at runtime
@@ -74,7 +45,6 @@ int main()
       std::cout << "invalid key: " << key << "\n";
     }
   }
-
   
   return 0;
 }
