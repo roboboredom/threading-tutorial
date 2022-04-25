@@ -6,14 +6,14 @@ mkdir -p build; cd build # make build dir; if not exist, move to it
 
 
 # include paths (.h):
-inc_root="-I ../include"
-#inc_engine="-I ../include/engine"
-#inc_project="-I ../include/project \
-#             -I ../include/project/clients"
+inc_root="-I ../inc"
+inc_engine="-I ../inc/engine"
+#inc_project="-I ../inc/project \
+#             -I ../inc/project/clients"
 
 # source paths (.cpp):
 src_root="../src/*.cpp"
-#src_engine="../src/engine/*.cpp"
+src_engine="../src/engine/*.cpp"
 #src_project="../src/project/*.cpp \
 #             ../src/project/clients/*.cpp"
 
@@ -22,10 +22,10 @@ src_root="../src/*.cpp"
 
 
 # prompt on what to build
-echo -n "What to build? ('root'): "; read input
+echo -n "What to build? ('root', 'engine'): "; read input
 
 case $input in
-  main | m)
+  root | r)
     echo -e "Building root...\n"
 
     #executable_name="main-$timestamp.exe"
@@ -34,12 +34,27 @@ case $input in
     g++ -std=c++17 \
     -o $executable_name \
     $inc_root \
-    $src_root \
-    -pthread
+    $src_root 
+    #-pthread
     
     echo -e "\n...finished!"
     ;;
+
+  engine | e)
+    echo -e "Building root, engine...\n"
+
+    #executable_name="main-$timestamp.exe"
+    executable_name="main.exe"
     
+    g++ -std=c++17 \
+    -o $executable_name \
+    $inc_root $inc_engine \
+    $src_root $inc_root 
+    #-pthread
+    
+    echo -e "\n...finished!"
+    ;;
+
   *)
     echo "Invalid input, skipped."
     ;;
