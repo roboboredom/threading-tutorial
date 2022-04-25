@@ -7,60 +7,34 @@ mkdir -p build; cd build # make build dir; if not exist, move to it
 
 # include paths (.h):
 inc_root="-I ../include"
-inc_engine="-I ../include/engine"
-inc_project="-I ../include/project \
-             -I ../include/project/clients"
+#inc_engine="-I ../include/engine"
+#inc_project="-I ../include/project \
+#             -I ../include/project/clients"
 
 # source paths (.cpp):
 src_root="../src/*.cpp"
-src_engine="../src/engine/*.cpp"
-src_project="../src/project/*.cpp \
-             ../src/project/clients/*.cpp"
+#src_engine="../src/engine/*.cpp"
+#src_project="../src/project/*.cpp \
+#             ../src/project/clients/*.cpp"
 
 #other vars 
 #timestamp=$(date '+%F_%H-%M-%S')
 
 
 # prompt on what to build
-echo -n "What to build? ('main', 'engine', 'project'): "; read input
+echo -n "What to build? ('root'): "; read input
 
 case $input in
   main | m)
-    echo -e "Building main...\n"
+    echo -e "Building root...\n"
 
     #executable_name="main-$timestamp.exe"
     executable_name="main.exe"
     
-    g++ -o $executable_name \
+    g++ -std=c++17 \
+    -o $executable_name \
+    $inc_root \
     $src_root \
-    -pthread
-    
-    echo -e "\n...finished!"
-    ;;
-
-  engine | e)
-    echo -e "Building engine...\n"
-    
-    #executable_name="engine-$timestamp.exe"
-    executable_name="engine.exe"
-    
-    g++ -o $executable_name \
-    $inc_root $inc_engine \
-    $src_root $src_engine \
-    -pthread
-    
-    echo -e "\n...finished!"
-    ;;
-    
-  project | p)
-    echo -e "Building project...\n"
-    
-    #executable_name="project-$timestamp.exe"
-    executable_name="project.exe"
-
-    g++ -o $executable_name \
-    $inc_root $inc_engine $inc_project \
-    $src_root $src_engine $src_project \
     -pthread
     
     echo -e "\n...finished!"
