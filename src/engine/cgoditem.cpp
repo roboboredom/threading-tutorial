@@ -1,5 +1,5 @@
 /* INCLUDE */
-#include "../../inc/engine/baseregistry.h"
+#include "../../inc/engine/cgoditem.h"
 
 /* CODE */
 CVariable::CVariable(std::string sName, int iID)
