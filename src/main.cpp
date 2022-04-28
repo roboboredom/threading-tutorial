@@ -17,10 +17,9 @@ int main()
   {
     std::cout << "\n====[ process exited ]====\n" 
               << e.what()
-              << "\n====----------------------====\n";
-    std::exit(1);
-    //return -1;
+              << "\n====------------------====\n";
+    std::exit(1); // 1 = error
   }
   
-  return 0;
+  return 0; // 0 = no error
 }
