@@ -1,8 +1,7 @@
 /* INCLUDE */
-#include "../inc/engine/cgoditem.h"
-#include <iostream>
+//#include "../inc/engine/ctypemanager.h"
 #include <string>
-#include <map>
+#include <iostream>
 #include <stdexcept>
 
 /* CODE */
@@ -10,12 +9,17 @@ int main()
 {
   try
   {
-    throw std::invalid_argument("amogus");
+    std::cout << "sussy baka\n";
+    throw std::runtime_error("amogus");
+    std::cout << "mogus\n";
   }
-  catch (std::invalid_argument& e)
+  catch (std::runtime_error& e)
   {
-    std::cerr << e.what() << std::endl;
-    return -1; 
+    std::cout << "\n====[ process exited ]====\n" 
+              << e.what()
+              << "\n====----------------------====\n";
+    std::exit(1);
+    //return -1;
   }
   
   return 0;

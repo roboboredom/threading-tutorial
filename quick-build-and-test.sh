@@ -1,86 +1,83 @@
 #!/bin/bash
-# bash script to run different compile / linking steps easily
+# Bash script to easily execute multiple compile / run jobs.
 
-shopt -s nocasematch; # ignore letter case
+# SETUP ========================================
+echo -e '\0033\0143'     # clear terminal
+shopt -s nocasematch     # set interpreter to ignore letter case
 mkdir -p build; cd build # make build dir; if not exist, move to it
 
-
-# include paths (.h):
-inc_root="-I ../inc"
-inc_engine="-I ../inc/engine"
-#inc_project="-I ../inc/project \
-#             -I ../inc/project/clients"
-
-# source paths (.cpp):
-src_root="../src/*.cpp"
-src_engine="../src/engine/*.cpp"
-#src_project="../src/project/*.cpp \
-#             ../src/project/clients/*.cpp"
-
-#other vars 
-#timestamp=$(date '+%F_%H-%M-%S')
+timestamp=$(date '+%F_%H-%M-%S') # timestamp var for files / logs
+# ----- ========================================
 
 
-# prompt on what to build
-echo -n "What to build? ('root', 'engine'): "; read input
+# PATHS ========================================
+  # INCLUDE PATHS (.h):
+    inc_root="-I ../inc"
+    inc_engine="-I ../inc/engine"
+    #inc_project="-I ../inc/project \
+    #             -I ../inc/project/clients"
 
+  # SOURCE PATHS (.cpp):
+    src_root="../src/*.cpp"
+    src_engine="../src/engine/*.cpp"
+    #src_project="../src/project/*.cpp \
+    #             ../src/project/clients/*.cpp"
+# ----- ========================================
+
+
+# SCRIPT =======================================
+echo -n "What to compile? ('root', 'engine'): "; read input
 case $input in
   root | r)
-    echo -e "Building root...\n"
+    echo -e "Starting compile job 'root'...\n"
 
-    #executable_name="main-$timestamp.exe"
-    executable_name="main.exe"
+    executable_name="main.exe" # "main-$timestamp.exe"
     
     g++ -std=c++17 \
     -o $executable_name \
     $inc_root \
     $src_root 
-    #-pthread
     
-    echo -e "\n...finished!"
+    echo -e "\n...compile job ended."
     ;;
 
   engine | e)
-    echo -e "Building root, engine...\n"
+    echo -e "Starting compile job 'engine'...\n"
 
-    #executable_name="main-$timestamp.exe"
     executable_name="main.exe"
     
     g++ -std=c++17 \
     -o $executable_name \
     $inc_root $inc_engine \
     $src_root $inc_root 
-    #-pthread
     
-    echo -e "\n...finished!"
+    echo -e "\n...compile job ended."
     ;;
 
   *)
-    echo "Invalid input, skipped."
+    echo "Invalid command."
     ;;
 esac
 
-
 # prompt to if to run the built exe or not
-echo -n "Run $executable_name? (yes, no): "; read input
-
+echo -n "Run $executable_name? ('y', 'n'): "; read input
 case $input in
-  yes | y)
+  y)
     echo -n "Running $executable_name ..."; echo -e "\n"
 
-    ./$executable_name
-    
-    echo -e "\n...program exited."
+    ./$executable_name; 
+
+    echo -e "\n...program exited with code: $?" # '$?' = return val of last run prog
     ;;
     
-  no | n)
+  n)
     echo "Skipped."
     ;;
     
   *)
-    echo "Invalid input, skipped."
+    echo "Invalid command."
     ;;
 esac
 
-
 cd .. #go back to root dir
+# ------ =======================================

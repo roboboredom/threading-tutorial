@@ -1,5 +1,5 @@
 /* INCLUDE */
-#include "../../inc/engine/cgoditem.h"
+#include "../../inc/engine/ctypemanager.h"
 
 /* CODE */
 CVariable::CVariable(std::string sName, int iID)
