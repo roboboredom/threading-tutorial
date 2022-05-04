@@ -2,22 +2,32 @@
 #include "../../inc/engine/ctypemanager.h"
 
 /* CODE */
-CVariable::CVariable(std::string sName, int iID)
-{ 
-  m_sName = sName;
-  m_iID = iID;
-}
-std::string CVariable::getName()
+CTypeManager::CTypeManager()
 {
-  return m_sName;
-}
-int CVariable::getID()
-{
-  return m_iID;
+  m_iTypeIDCounter = 0;
 }
 
-
-CVariableManager::CVariableManager()
+void CTypeManager::createType(std::string sName)
 {
-  m_iIDCounter = 0;
+  // m_vTypeNames.push_back(ctype); 
+}
+
+int CTypeManager::getTypeID(std::string sName)
+{
+  
+}
+
+int CTypeManager::getTypeName(int iID)
+{
+  
+}
+
+int CTypeManager::getNumberOfTypes()
+{
+  m_iTypeIDCounter;
+}
+
+const std::vector<std::string>& CTypeManager::getAllTypeNames();
+{
+  return m_vTypeNames;
 }
