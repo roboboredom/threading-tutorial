@@ -16,7 +16,7 @@ public:
   // proxy to T object 
   T* p_oT; 
 
-  CNode( T* p_oT )
+  CNode( T* p_oT = nullptr )
   {
     this->p_oT = p_oT;
     this->p_oNodeRight = nullptr;
@@ -37,12 +37,12 @@ public:
 class CItem
 {
 public:
-  CItem( int iValue )
+  CItem( int iInteger, std::string sString )
   {
-    this->iValue = iValue;
-    this->sString = std::to_string(iValue) += "loboguara";
+    this->iInteger = iInteger;
+    this->sString = sString;
   }
-  int iValue;
+  int iInteger;
   std::string sString;
 };
 
@@ -51,19 +51,30 @@ public:
 int main()
 {
   std::vector< CNode< CItem >* > vNodes;
-  for ( int i = 0; i < 3; i++ ) 
+  int iI = 0;
+  
+  while ( true )
   {
-    vNodes.push_back( new CNode< CItem >( new CItem( i ) ) );
-  }
+    std::cout << "Enter the string value to set in CItem obj: "; std::string sInput =""; std::cin >> sInput;
+    vNodes.push_back( new CNode< CItem >( new CItem( iI++, sInput ) ) );
 
-  for ( auto p_oNode : vNodes ) 
-  {
-    std::cout << "p_oNode->p_oT->iValue = "     << p_oNode->p_oT->iValue << ";\n";
+    CNode<CItem>* p_oNode = vNodes.back(); // last element in vector
+    // spew some data on the created CNode
     std::cout << "typeid( *p_oNode ).name() = " << typeid( *p_oNode ).name() << ";\n";
-    std::cout << "sizeof( *p_oNode ) = "        << sizeof( *p_oNode ) << " bytes;\n\n";
+    std::cout << "sizeof( *p_oNode )        = " << sizeof( *p_oNode ) << " bytes;\n\n";
+
+    // *( a->b->c ) = dereferences c
+    std::cout << "\ttypeid( *( p_oNode->p_oT ) ).name() = " << typeid( *( p_oNode->p_oT ) ).name() << ";\n";
+    std::cout << "\tsizeof( *( p_oNode->p_oT ) )        = " << sizeof( *( p_oNode->p_oT ) ) << " bytes;\n\n";
     
-    std::cout << "\ttypeid( p_oNode->*p_oT ).name() = " << typeid( *(p_oNode->p_oT) ).name() << ";\n";
-    std::cout << "\tsizeof( p_oNode->*p_oT ) = "        << sizeof( *(p_oNode->p_oT) ) << " bytes;\n\n";
+    std::cout << "\t\tp_oNode->p_oT->iInteger                       = " << p_oNode->p_oT->iInteger << ";\n";
+    std::cout << "\t\ttypeid( *( p_oNode->p_oT->iInteger ) ).name() = " << typeid( p_oNode->p_oT->iInteger ).name() << ";\n";
+    std::cout << "\t\tsizeof( *( p_oNode->p_oT->iInteger ) )        = " << sizeof( p_oNode->p_oT->iInteger ) << " bytes;\n\n";
+
+    std::cout << "\t\tp_oNode->p_oT->sString                       = " << p_oNode->p_oT->sString << ";\n";
+    std::cout << "\t\ttypeid( *( p_oNode->p_oT->sString ) ).name() = " << typeid( p_oNode->p_oT->sString ).name() << ";\n";
+    std::cout << "\t\tsizeof( *( p_oNode->p_oT->sString ) )        = " << sizeof( p_oNode->p_oT->sString ) << " bytes;\n\n";
+
     std::cout << "=========================================================\n";
   }
   
