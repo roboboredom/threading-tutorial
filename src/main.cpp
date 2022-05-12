@@ -6,7 +6,8 @@
 #include <string>
 
 /* CODE */
-template< typename T > class CNode 
+template< typename T > 
+class CNode 
 {
 public:
   // adjacent nodes 
@@ -25,15 +26,9 @@ public:
 };
 
 
-// template< template<typename> class CNode > 
-// class CLinkedList 
-// {
-// public:
-//   CNode<T>* p_oNodeHead;
-//   CNode<T>* p_oNodeTail;
-// };
 
 
+/* DEBUG */
 class CItem
 {
 public:
@@ -46,36 +41,46 @@ public:
   std::string sString;
 };
 
+namespace NDebug
+{
+  /* returns a string containing some data on a var */
+  template< typename T >
+  void printVarInfo( T oT, std::string sVariableName )
+  {
+    // construct string with iIndentLevel number of '\t'
+    std::cout << "[VAR INFO] " << sVariableName << "\n{\n\t"
+              << "typeid() = " << typeid( oT ).name() << ";\n\t"
+              << "sizeof() = " << sizeof( oT )        << "\n}\n";
+  }
+};
+
+namespace NTypeDefs
+{
+  typedef CNode< CItem > CItemNode;
+};
 
 /* MAIN */
 int main()
 {
-  std::vector< CNode< CItem >* > vNodes;
-  int iI = 0;
+  NTypeDefs::CItemNode p_oNodeA = new NTypeDefs::CItemNode(); 
+  NDebug::printVarInfo( p_oNodeA , "p_oNodeA" );
+  NDebug::printVarInfo( *p_oNodeA, "*p_oNodeA" );
   
+  std::vector< NTypeDefs::CItemNode* > vNodePtrs;
   while ( true )
   {
-    std::cout << "Enter the string value to set in CItem obj: "; std::string sInput =""; std::cin >> sInput;
-    vNodes.push_back( new CNode< CItem >( new CItem( iI++, sInput ) ) );
+    // get input arg
+    std::cout << "\nEnter the string value to set in CItem obj: "; 
+    std::string sInput = ""; std::cin >> sInput;
 
-    CNode<CItem>* p_oNode = vNodes.back(); // last element in vector
-    // spew some data on the created CNode
-    std::cout << "typeid( *p_oNode ).name() = " << typeid( *p_oNode ).name() << ";\n";
-    std::cout << "sizeof( *p_oNode )        = " << sizeof( *p_oNode ) << " bytes;\n\n";
+    // create vars using input arg
+    vNodePtrs.push_back( new NTypeDefs::CItemNode( new CItem( sInput ) ) );
 
-    // *( a->b->c ) = dereferences c
-    std::cout << "\ttypeid( *( p_oNode->p_oT ) ).name() = " << typeid( *( p_oNode->p_oT ) ).name() << ";\n";
-    std::cout << "\tsizeof( *( p_oNode->p_oT ) )        = " << sizeof( *( p_oNode->p_oT ) ) << " bytes;\n\n";
-    
-    std::cout << "\t\tp_oNode->p_oT->iInteger                       = " << p_oNode->p_oT->iInteger << ";\n";
-    std::cout << "\t\ttypeid( *( p_oNode->p_oT->iInteger ) ).name() = " << typeid( p_oNode->p_oT->iInteger ).name() << ";\n";
-    std::cout << "\t\tsizeof( *( p_oNode->p_oT->iInteger ) )        = " << sizeof( p_oNode->p_oT->iInteger ) << " bytes;\n\n";
-
-    std::cout << "\t\tp_oNode->p_oT->sString                       = " << p_oNode->p_oT->sString << ";\n";
-    std::cout << "\t\ttypeid( *( p_oNode->p_oT->sString ) ).name() = " << typeid( p_oNode->p_oT->sString ).name() << ";\n";
-    std::cout << "\t\tsizeof( *( p_oNode->p_oT->sString ) )        = " << sizeof( p_oNode->p_oT->sString ) << " bytes;\n\n";
-
-    std::cout << "=========================================================\n";
+    // spew info on created vars
+    NTypeDefs::CItemNode* p_oNode = vNodePtrs.back(); // get ptr to created vars
+    NDebug::printVarInfo( p_oNode, "p_oNode" );   // ptr info
+    NDebug::printVarInfo( *p_oNode, "*p_oNode" ); // ptr target info
+    std::cout << "\n";
   }
   
   return 0;
