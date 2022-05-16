@@ -25,22 +25,22 @@ public:
   }
 };
 
-
-
-
-/* DEBUG */
 class CItem
 {
 public:
-  CItem( int iInteger, std::string sString )
+  CItem( std::string sString )
   {
-    this->iInteger = iInteger;
     this->sString = sString;
   }
-  int iInteger;
   std::string sString;
 };
 
+namespace NTypeDefs
+{
+  typedef CNode< CItem > CItemNode;
+};
+
+/* DEBUG */
 namespace NDebug
 {
   /* returns a string containing some data on a var */
@@ -54,15 +54,10 @@ namespace NDebug
   }
 };
 
-namespace NTypeDefs
-{
-  typedef CNode< CItem > CItemNode;
-};
-
 /* MAIN */
 int main()
 {
-  NTypeDefs::CItemNode p_oNodeA = new NTypeDefs::CItemNode(); 
+  NTypeDefs::CItemNode* p_oNodeA = new NTypeDefs::CItemNode(); 
   NDebug::printVarInfo( p_oNodeA , "p_oNodeA" );
   NDebug::printVarInfo( *p_oNodeA, "*p_oNodeA" );
   
