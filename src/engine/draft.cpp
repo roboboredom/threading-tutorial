@@ -26,29 +26,8 @@ public:
 };
 
 /* CLinkedList */
-template<typename T>
-class CLinkedList
-{
-public:
-    /* CONSTRUCTOR */
-    CLinkedList(
-        T* p_oT = nullptr, 
-        int iValue = 0
-    ) 
-    { 
-        m_p_oT = p_oT;
-        m_iValue = iValue;
-    }
-    
-    /* MEMBERS */
-    T* m_p_oT;
-    int m_iValue;
-        
-    void m_getSpecialization() 
-    {
-        std::cout << "Specialization: template<typename T> class CLinkedList" << "\n";
-    }
-};
+template<typename T> // prevent un-specialized template instantiation
+class CLinkedList;
 
 template<typename T, typename S>
 class CLinkedList< CNode<T, S> >
@@ -73,7 +52,7 @@ public:
     
     void m_getSpecialization() 
     {
-        std::cout << "Specialization: template<typename T, typename S> class CLinkedList< <CNode<T, S> >" << "\n";
+        std::cout << "Specialization: template<typename T, typename S> class CLinkedList< <CNode<T, S> >" << "\n\n";
     }
 };
 
@@ -81,22 +60,33 @@ public:
 /* MAIN */
 int main()
 {
-    //typedef CNode<int>          CNodeI; // ERR: wrong number of template arguments (1, should be 2)
-    typedef CNode<int, int>     CNodeII;
-    typedef CNode<double, int>  CNodeDI;
+    //typedef CNode<int>         CNodeI; // ERR: wrong number of template arguments (1, should be 2)
+    typedef CNode<int, int>    CNodeII;
+    typedef CNode<double, int> CNodeDI;
     
     //typedef CNode<CNodeII>          CNode_CNodeII; // ERR: wrong number of template arguments (1, should be 2)
     typedef CNode<CNodeII, CNodeII> CNode_CNodeII_CNodeII;
     typedef CNode<CNodeDI, CNodeII> CNode_CNodeDI_CNodeII;
     
     
-    typedef CLinkedList<int>         CLinkedListI;
+    typedef CLinkedList<int>         CLinkedListI; 
+    typedef CLinkedList<double>      CLinkedListD;
     //typedef CLinkedList<int, int>    CLinkedListII; // ERR: wrong number of template arguments (2, should be 1)
     //typedef CLinkedList<double, int> CLinkedListDI; // ERR: wrong number of template arguments (2, should be 1)
     
     typedef CLinkedList<CNodeII>          CLinkedList_CNodeII;
+    typedef CLinkedList<CNodeDI>          CLinkedList_CNodeDI;
     //typedef CLinkedList<CNodeII, CNodeII> CLinkedList_CNodeII_CNodeII; // ERR: wrong number of template arguments (2, should be 1)
     //typedef CLinkedList<CNodeDI, CNodeII> CLinkedList_CNodeDI_CNodeII; // ERR: wrong number of template arguments (2, should be 1)
+    
+    
+    // using objects of template instantiations defined above, test some random shit
+    CLinkedListI        oLinkedListI;        std::cout << "oLinkedListI\n";        oLinkedListI.m_getSpecialization();
+    CLinkedListD        oLinkedListD;        std::cout << "oLinkedListD\n";        oLinkedListD.m_getSpecialization();
+    
+    CLinkedList_CNodeII oLinkedList_CNodeII; std::cout << "oLinkedList_CNodeII\n"; oLinkedList_CNodeII.m_getSpecialization();
+    CLinkedList_CNodeDI oLinkedList_CNodeDI; std::cout << "oLinkedList_CNodeDI\n"; oLinkedList_CNodeDI.m_getSpecialization();
+    
     
     return 0;
 }
