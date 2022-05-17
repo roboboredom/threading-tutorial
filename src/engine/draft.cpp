@@ -38,7 +38,7 @@ public:
     { 
         m_p_oT = p_oT;
         m_iValue = iValue;
-    };
+    }
     
     /* MEMBERS */
     T* m_p_oT;
@@ -57,14 +57,14 @@ public:
     /* CONSTRUCTOR */
     CLinkedList(
         CNode<T, S>* p_oNodeHead = nullptr,
-        CNode<T, S>* p_oNodeTail = nullptr
+        CNode<T, S>* p_oNodeTail = nullptr,
         int iValue = 0
     ) 
     {
         m_p_oNodeHead = p_oNodeHead;
         m_p_oNodeTail = p_oNodeTail;
-        m_iValue = iValue
-    };
+        m_iValue = iValue;
+    }
     
     /* MEMBERS */
     CNode<T, S>* m_p_oNodeHead;
@@ -81,26 +81,22 @@ public:
 /* MAIN */
 int main()
 {
-    //typedef CSomeRandomClass<int>         CSrc_I;   CSrc_I  oSrc_I; // ERR: wrong number of template arguments (1, should be 2)
-    typedef CSomeRandomClass<int, int>    CSrc_II;       CSrc_II     oSrc_II;
-    typedef CSomeRandomClass<double, int> CSrc_DI;       CSrc_DI     oSrc_DI;
-
-    typedef CMyTemplateClass<int>         CMtc_I;        CMtc_I      oMtc_I;
-    typedef CMyTemplateClass<double>      CMtc_D;        CMtc_D      oMtc_D;
-    //typedef CMyTemplateClass<double, int> CMtc_DI;  CMtc_DI oMtc_DI; // ERR: wrong number of template arguments (2, should be 1)
-
-    typedef CMyTemplateClass<CSrc_II>     CMtc_Src_II;   CMtc_Src_II oMtc_Src_II;
-    typedef CMyTemplateClass<CSrc_DI>     CMtc_Src_DI;   CMtc_Src_DI oMtc_Src_DI;
-    //typedef CMyTemplateClass<CSrc_II, int>     CMtc_Src_II_I;   CMtc_Src_II_I oMtc_Src_II_I; // ERR: wrong number of template arguments (2, should be 1)
+    //typedef CNode<int>          CNodeI; // ERR: wrong number of template arguments (1, should be 2)
+    typedef CNode<int, int>     CNodeII;
+    typedef CNode<double, int>  CNodeDI;
     
-    int iInt = 1; double iDouble = 1.5;
+    //typedef CNode<CNodeII>          CNode_CNodeII; // ERR: wrong number of template arguments (1, should be 2)
+    typedef CNode<CNodeII, CNodeII> CNode_CNodeII_CNodeII;
+    typedef CNode<CNodeDI, CNodeII> CNode_CNodeDI_CNodeII;
     
-    oMtc_I.m_doSomething( &iInt );
-    //oMtc_I.m_doSomething( &iDouble ); // ERR: cannot convert 'double*' to 'int*'
     
-    //oMtc_D.m_doSomething( &iInt ); // ERR: cannot convert 'int*' to 'double*'    
-    oMtc_D.m_doSomething( &iDouble );
+    typedef CLinkedList<int>         CLinkedListI;
+    //typedef CLinkedList<int, int>    CLinkedListII; // ERR: wrong number of template arguments (2, should be 1)
+    //typedef CLinkedList<double, int> CLinkedListDI; // ERR: wrong number of template arguments (2, should be 1)
     
+    typedef CLinkedList<CNodeII>          CLinkedList_CNodeII;
+    //typedef CLinkedList<CNodeII, CNodeII> CLinkedList_CNodeII_CNodeII; // ERR: wrong number of template arguments (2, should be 1)
+    //typedef CLinkedList<CNodeDI, CNodeII> CLinkedList_CNodeDI_CNodeII; // ERR: wrong number of template arguments (2, should be 1)
     
     return 0;
 }
